@@ -1,4 +1,5 @@
 #include "Engine.hpp"
+#include "Scene.hpp"
 
 #include <iostream>
 
@@ -47,7 +48,11 @@ bool Engine::initialize(const std::string &title, int width, int height) {
     return true; 
 }
 
-void Engine::run() {
+void Engine::run(Scene* startScene) {
+    if(startScene != nullptr) {
+        push(startScene);
+    }
+
     if(!initialized) {
         initialize();
     }
@@ -63,7 +68,9 @@ void Engine::run() {
             }
         } 
 
-        // TODO: Update scene state
+        if(!scenes.empty()) {
+            scenes.top()->onUpdate();
+        }
     }
 }
 
@@ -77,6 +84,29 @@ bool Engine::isInitialized() const {
 
 void Engine::stop() {
     running = false;
+}
+
+void Engine::push(Scene *scene) {
+    if(!scenes.empty()) {
+        scenes.top()->onPause();
+    }
+    scenes.push(scene);
+    scene->onStart();
+}
+
+void Engine::pop() {
+    if(!scenes.empty()) {
+        auto scene = scenes.top();
+        scenes.pop();
+
+        scene->onFinish();
+        delete scene;
+        scene = nullptr;
+
+        if(!scenes.empty()) {
+            scenes.top()->onResume();
+        }
+    }
 }
 
 NOXIS_NS_END;

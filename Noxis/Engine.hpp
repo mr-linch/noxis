@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stack>
 #include <string>
 
 #include "ns.hpp"
@@ -8,6 +9,8 @@ struct SDL_Window;
 struct SDL_Renderer;
 
 NOXIS_NS_BEGIN;
+
+class Scene;
 
 class Engine {
     private:
@@ -19,8 +22,11 @@ class Engine {
         
         SDL_Window* window = nullptr;
         SDL_Renderer* renderer = nullptr;
+
         bool running = false;
         bool initialized = false;
+
+        std::stack<Scene*> scenes;
     public:
         /**
          * @brief Get shared instance of engine
@@ -35,7 +41,7 @@ class Engine {
         /**
          * @brief Start main loop
          */
-        void run();
+        void run(Scene* startScene = nullptr);
         
         /**
          * @brief Check if main loop started
@@ -51,6 +57,13 @@ class Engine {
          * @brief Stop execution of main loop
          */
         void stop();
+        
+        /**
+         * @brief Push scene to stack
+         */
+        void push(Scene *scene);
+
+        void pop();
 };
 
 NOXIS_NS_END;
