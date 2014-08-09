@@ -3,14 +3,14 @@
 
 USING_NOXIS_NS;
 
-class HelloScene : public Scene {
+class SimpleScene : public Scene {
     public:
-        virtual void onUpdate() override {
-            std::cout << "Hello Scene Managment!" << std::endl;
+        virtual void onUpdate() {
+            // Logic here
         }
 };
 
 int main() {
     auto engine = Engine::getInstance();
-    engine->run(new HelloScene());
+    engine->run(new SimpleScene());
 }

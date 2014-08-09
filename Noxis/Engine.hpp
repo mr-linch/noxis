@@ -27,6 +27,8 @@ class Engine {
         bool initialized = false;
 
         std::stack<Scene*> scenes;
+
+        unsigned int maxFPS = 25;
     public:
         /**
          * @brief Get shared instance of engine
@@ -62,8 +64,23 @@ class Engine {
          * @brief Push scene to stack
          */
         void push(Scene *scene);
-
+        
+        /**
+         * @brief Pop scene from stack
+         */
         void pop();
+        
+        void popAll();
+
+        /**
+         * @brief Set max value of frame rate
+         */
+        void setMaxFPS(unsigned int maxFPS);
+
+        /**
+         * @brief Get max value of frame rate
+         */
+        unsigned int getMaxFPS() const;
 };
 
 NOXIS_NS_END;

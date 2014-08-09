@@ -56,6 +56,9 @@ void Engine::run(Scene* startScene) {
     if(!initialized) {
         initialize();
     }
+    
+    unsigned int nextGameTick= SDL_GetTicks();
+    int sleepTime = 0 ;
 
     running = true;
     SDL_Event event;
@@ -68,9 +71,33 @@ void Engine::run(Scene* startScene) {
             }
         } 
 
-        if(!scenes.empty()) {
+        if(scenes.empty()) {
+            running = false;
+        } else {
             scenes.top()->onUpdate();
         }
+
+        nextGameTick += 1000 / maxFPS;
+        sleepTime = nextGameTick - SDL_GetTicks();
+        if(sleepTime >= 0) {
+            SDL_Delay(sleepTime);
+        }
+    }
+
+    // Pop all scenes from stack
+    popAll();
+}
+
+
+void Engine::popAll() {
+    while(!scenes.empty()) {
+        auto scene = scenes.top();
+        scene->onFinish();
+
+        delete scene;
+        scene = nullptr;
+        
+        scenes.pop();
     }
 }
 
@@ -107,6 +134,14 @@ void Engine::pop() {
             scenes.top()->onResume();
         }
     }
+}
+
+void Engine::setMaxFPS(unsigned int maxFPS) {
+    this->maxFPS = maxFPS;
+}
+
+unsigned int Engine::getMaxFPS() const {
+    return maxFPS;
 }
 
 NOXIS_NS_END;
