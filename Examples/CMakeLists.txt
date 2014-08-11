@@ -1,5 +1,6 @@
 set(EXAMPLES
-    example.cpp
+    simple_example.cpp
+    scene_tree_example.cpp
 )
 
 include_directories(

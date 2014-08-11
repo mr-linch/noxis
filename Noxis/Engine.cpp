@@ -88,7 +88,6 @@ void Engine::run(Scene* startScene) {
     popAll();
 }
 
-
 void Engine::popAll() {
     while(!scenes.empty()) {
         auto scene = scenes.top();

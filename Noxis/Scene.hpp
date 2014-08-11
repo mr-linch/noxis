@@ -1,10 +1,11 @@
 #pragma once
 
 #include "ns.hpp"
+#include "Node.hpp"
 
 NOXIS_NS_BEGIN;
 
-class Scene {
+class Scene : public Node {
     public:
         /**
          * @brief Default contstructor

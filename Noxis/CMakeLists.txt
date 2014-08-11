@@ -5,15 +5,17 @@ project(Noxis)
 set(CLASSES
     Engine
     Scene
+    Node
 )
 
 set(HEADERS
     ns.hpp
     Noxis.hpp
+    utils.hpp
 )
 
 set(SOURCES
-
+    utils.cpp
 )
 
 foreach(CLASS ${CLASSES})
