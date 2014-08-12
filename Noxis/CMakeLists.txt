@@ -14,6 +14,8 @@ set(HEADERS
     ns.hpp
     Noxis.hpp
     utils.hpp
+    Point2D.hpp
+    Size2D.hpp
 )
 
 set(SOURCES

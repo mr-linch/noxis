@@ -7,3 +7,5 @@
 #include "utils.hpp"
 #include "Logger.hpp"
 #include "LogHandler.hpp"
+#include "Point2D.hpp"
+#include "Size2D.hpp"
