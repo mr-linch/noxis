@@ -6,6 +6,8 @@ set(CLASSES
     Engine
     Scene
     Node
+    Logger
+    LogHandler
 )
 
 set(HEADERS

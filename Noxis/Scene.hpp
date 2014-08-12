@@ -28,11 +28,6 @@ class Scene : public Node {
         virtual void onPause();
 
         /**
-         * @brief Called every frame, if scene scene is not paused
-         */
-        virtual void onUpdate() = 0;
-        
-        /**
          * @brief Called when scene resume execution
          */
         virtual void onResume();

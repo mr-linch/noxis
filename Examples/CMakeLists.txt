@@ -1,7 +1,6 @@
-set(EXAMPLES
-    simple_example.cpp
-    scene_tree_example.cpp
-)
+cmake_minimum_required(VERSION 2.8)
+
+aux_source_directory(. EXAMPLES)
 
 include_directories(
     ${NoxisEngine_SOURCE_DIR}/

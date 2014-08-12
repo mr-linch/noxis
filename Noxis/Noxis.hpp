@@ -5,3 +5,5 @@
 #include "Scene.hpp"
 #include "Node.hpp"
 #include "utils.hpp"
+#include "Logger.hpp"
+#include "LogHandler.hpp"
