@@ -1,8 +1,8 @@
 #include "Engine.hpp"
 #include "Scene.hpp"
+#include "FPSLimiter.hpp"
 
 #include <iostream>
-
 #include <SDL2/SDL.h>
 
 NOXIS_NS_BEGIN;
@@ -57,9 +57,6 @@ void Engine::run(Scene* startScene) {
         initialize();
     }
     
-    unsigned int nextGameTick= SDL_GetTicks();
-    int sleepTime = 0 ;
-
     running = true;
     SDL_Event event;
     while(running) {
@@ -76,12 +73,8 @@ void Engine::run(Scene* startScene) {
         } else {
             scenes.top()->onUpdate();
         }
-
-        nextGameTick += 1000 / maxFPS;
-        sleepTime = nextGameTick - SDL_GetTicks();
-        if(sleepTime >= 0) {
-            SDL_Delay(sleepTime);
-        }
+        
+        fpsLimiter.limit(); 
     }
 
     // Pop all scenes from stack
@@ -135,12 +128,8 @@ void Engine::pop() {
     }
 }
 
-void Engine::setMaxFPS(unsigned int maxFPS) {
-    this->maxFPS = maxFPS;
-}
-
-unsigned int Engine::getMaxFPS() const {
-    return maxFPS;
+const FPSLimiter& Engine::getFPSLimiter() const {
+    return fpsLimiter;
 }
 
 NOXIS_NS_END;

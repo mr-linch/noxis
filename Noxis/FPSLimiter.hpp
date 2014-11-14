@@ -34,10 +34,19 @@ class FPSLimiter {
         void setMaxFPS(int maxFPS);
 
         int getFrameMinTime() const;
+
         int getFrameMaxTime() const;
+
         double getFrameAverageTime() const;
+
+        /**
+         * @brief Get current FPS value
+         */
         int getFPS() const;
         
+        /**
+         * @brief Limit frame rate
+         */
         void limit();
 };
 

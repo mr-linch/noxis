@@ -41,12 +41,13 @@ void FPSLimiter::limit() {
 
     lastFrameTicks = currentTicks;
 
-    fps = frameCount;
-    frameAverage = averageTicks / frameCount;
-    frameMin = minTicks;
-    frameMax = maxTicks;
 
     if(currentTicks - lastSecondTicks >= 1000) {
+        fps = frameCount;
+        frameAverage = averageTicks / frameCount;
+        frameMin = minTicks;
+        frameMax = maxTicks;
+
         frameCount = 0;
         minTicks = 1000;
         maxTicks = 0;
