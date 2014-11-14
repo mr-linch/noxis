@@ -150,7 +150,10 @@ void Node::onUpdate() {
 }
 
 void Node::update() {
-    // TODO: Impliment
+    onUpdate();
+    for(auto child : children) {
+        child->update();
+    }
 }
 
 NOXIS_NS_END;
