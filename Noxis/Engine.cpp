@@ -48,13 +48,15 @@ bool Engine::initialize(const std::string &title, int width, int height) {
     return true; 
 }
 
-void Engine::run(Scene* startScene) {
+bool Engine::run(Scene* startScene) {
     if(startScene != nullptr) {
         push(startScene);
     }
 
     if(!initialized) {
-        initialize();
+        if(!initialize()) {
+            return EXIT_FAILURE;
+        }
     }
     
     running = true;
@@ -79,6 +81,8 @@ void Engine::run(Scene* startScene) {
 
     // Pop all scenes from stack
     popAll();
+
+    return EXIT_SUCCESS;
 }
 
 void Engine::popAll() {

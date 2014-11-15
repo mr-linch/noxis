@@ -1,5 +1,4 @@
 #include <Noxis/Noxis.hpp>
-#include <iostream>
 
 USING_NOXIS_NS;
 
@@ -12,5 +11,5 @@ class SimpleScene : public Scene {
 
 int main() {
     auto engine = Engine::getInstance();
-    engine->run(new SimpleScene());
+    return engine->run(new SimpleScene());
 }

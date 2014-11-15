@@ -46,7 +46,7 @@ class Engine {
         /**
          * @brief Start main loop
          */
-        void run(Scene* startScene = nullptr);
+        bool run(Scene* startScene = nullptr);
         
         /**
          * @brief Check if main loop started
