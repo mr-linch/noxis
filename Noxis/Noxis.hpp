@@ -7,3 +7,5 @@
 #include "utils.hpp"
 #include "Point2D.hpp"
 #include "Size2D.hpp"
+#include "ResourceManager.hpp"
+#include "Resource.hpp"

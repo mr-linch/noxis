@@ -13,6 +13,7 @@ struct SDL_Renderer;
 NOXIS_NS_BEGIN;
 
 class Scene;
+class ResourceManager;
 
 class Engine {
     private:
@@ -31,6 +32,8 @@ class Engine {
         std::stack<Scene*> scenes;
 
         FPSLimiter fpsLimiter;
+
+        ResourceManager *resourceManager;
 
     public:
         /**
@@ -79,6 +82,8 @@ class Engine {
          * @brief Get frame rate limiter
          */
         const FPSLimiter& getFPSLimiter() const;
+
+        ResourceManager* getResourceManager() const;
 
 };
 

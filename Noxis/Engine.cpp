@@ -1,17 +1,19 @@
 #include "Engine.hpp"
 #include "Scene.hpp"
 #include "FPSLimiter.hpp"
+#include "ResourceManager.hpp"
 
 #include <iostream>
 #include <SDL2/SDL.h>
 
 NOXIS_NS_BEGIN;
 
-Engine::Engine() {
+Engine::Engine() : resourceManager(new ResourceManager) {
 
 }
 
 Engine::~Engine() {
+    delete resourceManager;
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -134,6 +136,10 @@ void Engine::pop() {
 
 const FPSLimiter& Engine::getFPSLimiter() const {
     return fpsLimiter;
+}
+
+ResourceManager* Engine::getResourceManager() const {
+    return resourceManager;
 }
 
 NOXIS_NS_END;
