@@ -76,6 +76,9 @@ class Engine {
          */
         void pop();
 
+        /**
+         * @brief Pop all scenes from stack
+         */
         void popAll();
 
         /**
@@ -83,8 +86,12 @@ class Engine {
          */
         const FPSLimiter& getFPSLimiter() const;
 
+        /**
+         * @brief Get resource manager
+         */
         ResourceManager* getResourceManager() const;
 
+        SDL_Renderer* getRenderer() const;
 };
 
 NOXIS_NS_END;

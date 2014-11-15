@@ -1,13 +1,14 @@
 #pragma once
 
 #include "ns.hpp"
+#include "filesystem.hpp"
+#include "Resource.hpp"
 
 #include <string>
 #include <unordered_map>
+#include <iostream>
 
 NOXIS_NS_BEGIN;
-
-class Resource;
 
 class ResourceManager {
         std::string rootPath;
@@ -29,13 +30,27 @@ class ResourceManager {
         /**
          * @brief Load resource by path
          */
-        Resource* load(const std::string path, std::string id = "");
+        template<class ResourceType>
+        ResourceType* load(const std::string path, std::string id = "") {
+            if(id.empty()) {
+                id = path;
+            }
 
-        /**
-         * @brief Unload resource from manager
-         * @warning This method don't destroy object
-         */
-        Resource* unload(const std::string &id);
+            auto cached = resources.find(id);
+
+            if(cached != resources.end()) {
+                return dynamic_cast<ResourceType*>(cached->second);
+            }
+
+            std::clog << "Load resource \"" << path << "\"" << std::endl;
+            auto fullPath = joinPath({rootPath, path});
+            if(!isFileExist(fullPath)) {
+                throw std::runtime_error("File doesn't exists \"" + fullPath + "\"");
+            }
+            resources[id] = new ResourceType(joinPath({rootPath, path}));
+
+            return dynamic_cast<ResourceType*>(resources[id]);
+        }
 
         /**
          * @brief Remove resource from cache and destroy them
@@ -46,8 +61,6 @@ class ResourceManager {
          * @brief Remove all resources from memory
          */
         void clear();
-
-        Resource* get(const std::string &id);
 
         virtual ~ResourceManager();
 };

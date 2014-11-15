@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 NOXIS_NS_BEGIN;
 
@@ -14,6 +15,7 @@ Engine::Engine() : resourceManager(new ResourceManager) {
 
 Engine::~Engine() {
     delete resourceManager;
+    IMG_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -46,19 +48,26 @@ bool Engine::initialize(const std::string &title, int width, int height) {
         return false;
     }
 
+    // Initialize SDL2_image lib
+    auto imageLibInitFlags = IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF;
+    if((IMG_Init(imageLibInitFlags) & imageLibInitFlags) != imageLibInitFlags) {
+        std::cerr << "IMG_Init error: " << IMG_GetError() << std::endl;
+        return false;
+    }
+
     initialized = true;
     return true;
 }
 
 bool Engine::run(Scene* startScene) {
-    if(startScene != nullptr) {
-        push(startScene);
-    }
-
     if(!initialized) {
         if(!initialize()) {
             return EXIT_FAILURE;
         }
+    }
+
+    if(startScene != nullptr) {
+        push(startScene);
     }
 
     running = true;
@@ -72,6 +81,8 @@ bool Engine::run(Scene* startScene) {
             }
         }
 
+        SDL_RenderClear(renderer);
+
         if(scenes.empty()) {
             running = false;
         } else {
@@ -79,6 +90,8 @@ bool Engine::run(Scene* startScene) {
         }
 
         fpsLimiter.limit();
+
+        SDL_RenderPresent(renderer);
     }
 
     // Pop all scenes from stack
@@ -140,6 +153,10 @@ const FPSLimiter& Engine::getFPSLimiter() const {
 
 ResourceManager* Engine::getResourceManager() const {
     return resourceManager;
+}
+
+SDL_Renderer* Engine::getRenderer() const {
+    return renderer;
 }
 
 NOXIS_NS_END;

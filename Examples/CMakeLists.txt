@@ -1,4 +1,4 @@
-wcmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8)
 
 aux_source_directory(. EXAMPLES)
 
@@ -13,6 +13,6 @@ link_directories(
 foreach(EXAMPLE ${EXAMPLES})
     get_filename_component(EXECUTABLE ${EXAMPLE} NAME_WE)
     add_executable(${EXECUTABLE} ${EXAMPLE})
-    target_link_libraries(${EXECUTABLE} noxis ${SDL2_LIBRARIES})
+    target_link_libraries(${EXECUTABLE} noxis ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
 endforeach(EXAMPLE)
 

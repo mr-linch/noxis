@@ -1,7 +1,5 @@
 #include "ResourceManager.hpp"
-#include "Resource.hpp"
 
-#include <iostream>
 #include <stdexcept>
 
 NOXIS_NS_BEGIN;
@@ -19,32 +17,6 @@ std::string ResourceManager::getRootPath() const {
     return rootPath;
 }
 
-Resource* ResourceManager::load(const std::string path, std::string id) {
-    if(id.empty()) {
-        id = path;
-    }
-
-    auto cached = resources.find(id);
-
-    if(cached != resources.end()) {
-        return cached->second;
-    }
-
-    std::clog << "Load resource \"" << path << "\"" << std::endl;
-    resources[id] = new Resource(path);
-
-    return resources[id];
-}
-
-Resource* ResourceManager::unload(const std::string &id) {
-    auto resource = resources.find(id);
-    if(resource != resources.end()) {
-        resources.erase(resource);
-        return resource->second;
-    }
-    return nullptr;
-}
-
 bool ResourceManager::remove(const std::string &id) {
     auto resource = resources.find(id);
     if(resource != resources.end()) {
@@ -57,7 +29,6 @@ bool ResourceManager::remove(const std::string &id) {
     return false;
 }
 
-
 void ResourceManager::clear() {
     for(auto &resource : resources) {
         std::clog << "Remove resource " << resource.first << " (\"" << resource.second->getPath() << "\")" << std::endl;
@@ -65,14 +36,6 @@ void ResourceManager::clear() {
         resource.second = nullptr;
     }
     resources.clear();
-}
-
-Resource* ResourceManager::get(const std::string &id) {
-    if(resources.find(id) == resources.end()) {
-        throw std::logic_error(std::string("try to get unloaded resource ") + id) ;
-    }
-    return resources[id];
-
 }
 
 ResourceManager::~ResourceManager() {
