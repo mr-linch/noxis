@@ -13,6 +13,6 @@ link_directories(
 foreach(EXAMPLE ${EXAMPLES})
     get_filename_component(EXECUTABLE ${EXAMPLE} NAME_WE)
     add_executable(${EXECUTABLE} ${EXAMPLE})
-    target_link_libraries(${EXECUTABLE} noxis SDL2)
+    target_link_libraries(${EXECUTABLE} noxis ${SDL2_LIBRARIES})
 endforeach(EXAMPLE)
 
