@@ -20,7 +20,7 @@ float toRadians(float degree);
  * @param radians angle in radians
  * @return angle in degree
  */
-float toDegrees(float radians); 
+float toDegrees(float radians);
 
 /**
  * @brief Print tree of node as hierarchy list
@@ -28,8 +28,8 @@ float toDegrees(float radians);
  * @param os output stream
  * @param levle start indent value
  */
-void printTree(Node *startNode, 
-               std::ostream &os = std::cout, 
+void printTree(Node *startNode,
+               std::ostream &os = std::cout,
                unsigned int level = 0);
 
 NOXIS_NS_END;

@@ -13,7 +13,7 @@ class FPSLimiter {
 
         int minTicks, maxTicks;
         int currentTicks, targetTicks;
-        
+
         double averageTicks;
         float maxFrameTicks;
 
@@ -22,7 +22,7 @@ class FPSLimiter {
 
     public:
         FPSLimiter(int maxFPS = 25);
-        
+
         /**
          * @brief Get max value of FPS
          */
@@ -43,7 +43,7 @@ class FPSLimiter {
          * @brief Get current FPS value
          */
         int getFPS() const;
-        
+
         /**
          * @brief Limit frame rate
          */

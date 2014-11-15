@@ -25,23 +25,23 @@ class ResourceManager {
          * @brief Set root path
          */
         void setRootPath(const std::string &rootPath);
-    
+
         /**
          * @brief Load resource by path
          */
         Resource* load(const std::string path, std::string id = "");
-        
+
         /**
          * @brief Unload resource from manager
          * @warning This method don't destroy object
          */
         Resource* unload(const std::string &id);
-        
+
         /**
          * @brief Remove resource from cache and destroy them
          */
         bool remove(const std::string &id);
-        
+
         /**
          * @brief Remove all resources from memory
          */

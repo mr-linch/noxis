@@ -20,7 +20,7 @@ void printTree(Node *startNode, std::ostream &os, unsigned int level) {
 
     for(auto child : startNode->getChildren()) {
         printTree(child, os, level + 1);
-    } 
+    }
 }
 
 NOXIS_NS_END;

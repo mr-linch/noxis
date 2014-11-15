@@ -30,24 +30,24 @@ bool Engine::initialize(const std::string &title, int width, int height) {
         return false;
     }
 
-    window = SDL_CreateWindow(title.c_str(), 
-            SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 
+    window = SDL_CreateWindow(title.c_str(),
+            SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
             width, height,
             SDL_WINDOW_SHOWN);
-    
+
     if(window == nullptr) {
         std::cerr << "SDL_CreateWindow error: " << SDL_GetError() << std::endl;
         return false;
     }
 
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC); 
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if(renderer == nullptr) {
         std::cerr << "SDL_CreateRenderer error: " << SDL_GetError() << std::endl;
-        return false; 
+        return false;
     }
-    
+
     initialized = true;
-    return true; 
+    return true;
 }
 
 bool Engine::run(Scene* startScene) {
@@ -60,7 +60,7 @@ bool Engine::run(Scene* startScene) {
             return EXIT_FAILURE;
         }
     }
-    
+
     running = true;
     SDL_Event event;
     while(running) {
@@ -70,15 +70,15 @@ bool Engine::run(Scene* startScene) {
             } else {
                 // TODO: Add event processing
             }
-        } 
+        }
 
         if(scenes.empty()) {
             running = false;
         } else {
             scenes.top()->onUpdate();
         }
-        
-        fpsLimiter.limit(); 
+
+        fpsLimiter.limit();
     }
 
     // Pop all scenes from stack
@@ -94,13 +94,13 @@ void Engine::popAll() {
 
         delete scene;
         scene = nullptr;
-        
+
         scenes.pop();
     }
 }
 
 bool Engine::isRunning() const {
-    return running; 
+    return running;
 }
 
 bool Engine::isInitialized() const {

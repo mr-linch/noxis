@@ -14,7 +14,7 @@ class Point2D {
         Point2D(const T &value) : x(value), y(value) {}
         Point2D(const T &xValue, const T &yValue) : x(xValue), y(yValue) {}
         Point2D(const Point2D &v) : x(v.x), y(v.y) {}
-        
+
         /**
          * @brief Squared lenght of vector
          * @see length
@@ -30,7 +30,7 @@ class Point2D {
         T length() const {
             return std::sqrt(lengthSquared());
         }
-     
+
         /**
          * @brief The dot product of two vector
          */
@@ -51,12 +51,12 @@ class Point2D {
         T distance(const Point2D& v) const {
             return distanceSquared(v);
         }
-       
+
         /**
-         * @brief Angle in degrees of this vector (point) relative to the x-axis. Angles are towards the positive y-axis 
+         * @brief Angle in degrees of this vector (point) relative to the x-axis. Angles are towards the positive y-axis
          */
         T angle() const {
-           return toDegrees(angleInRadians()); 
+           return toDegrees(angleInRadians());
         }
 
         /**
@@ -65,7 +65,7 @@ class Point2D {
         T angleInRadians() const {
             return std::atan2(y, x);
         }
-        
+
         /**
          * @brief Rotate vector by the given angle
          * @param degrees the angle in degrees
@@ -94,7 +94,7 @@ class Point2D {
         Point2D operator + () const {
             return *this;
         }
-        
+
         Point2D operator - () const {
             return {-x, -y};
         }
@@ -102,15 +102,15 @@ class Point2D {
         Point2D operator + (const Point2D &v) const {
             return {x + v.x, y + v.y};
         }
-        
+
         Point2D operator - (const Point2D &v) const {
             return {x - v.x, y - v.y};
         }
-        
+
         Point2D operator * (const Point2D &v) const {
             return {x * v.x, y * v.y};
         }
-        
+
         Point2D operator / (const Point2D &v) const {
             return {x / v.x, y / v.y};
         }
@@ -118,11 +118,11 @@ class Point2D {
         Point2D operator + (const T &s) const {
             return {x + s, y + s};
         }
-        
+
         Point2D operator - (const T &s) const {
             return {x - s, y - s};
         }
-       
+
         Point2D operator * (const T &s) const {
             return {x * s, y * s};
         }
@@ -136,13 +136,13 @@ class Point2D {
             y += v.y;
             return this;
         }
-        
+
         Point2D& operator -= (const Point2D &v) {
             x -= v.x;
             y -= v.y;
             return this;
         }
-        
+
         Point2D& operator /= (const Point2D &v) {
             x /= v.x;
             y /= v.y;
@@ -160,13 +160,13 @@ class Point2D {
             y += s;
             return this;
         }
-        
+
         Point2D& operator -= (const T &s) {
             x -= s;
             y -= s;
             return this;
         }
-        
+
         Point2D& operator *= (const T &s) {
             x *= s;
             y *= s;
@@ -181,7 +181,7 @@ class Point2D {
         Point2D& operator == (const Point2D &v) const {
             return (x == v.x) && (y == v.y);
         }
-        
+
         Point2D& operator != (const Point2D &v) const {
             return (x != v.x) || (y != v.y);
         }

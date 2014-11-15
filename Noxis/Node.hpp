@@ -18,11 +18,11 @@ class Node {
         Node(const std::string &name = "noname", Node *parent = nullptr);
 
         virtual ~Node();
-        
+
         /**
          * @brief Attach child to node
          *
-         * Attach child to this node, its parent automatically 
+         * Attach child to this node, its parent automatically
          * set this node.
          *
          * @param child pointer to child
@@ -30,13 +30,13 @@ class Node {
          * @return this
          */
         Node* attachChild(Node *child);
-        
+
         /**
          * @brief Detach child of the node
          * @param child pointer to child
          */
         void detachChild(Node *child);
-        
+
         /**
          * @brief Detach child of the node with specific name
          * @param name name of the child
@@ -44,7 +44,7 @@ class Node {
          * @return if to the node attached child with specific name, then pointer to him, else nullptr
          */
         Node* detachChild(const std::string &name);
-        
+
         /**
          * @brief Detach all child of this node
          */
@@ -59,19 +59,19 @@ class Node {
          * @brief Detach current node from parent
          */
         void detachFromParent();
-        
+
         /**
          * @brief Detach and destroy child of this node
          * @param child child node
          */
         void destroyChild(Node *child);
-    
+
         /**
          * @brief Detach and destroy child of this node, by specific name
          * @param name name of child node
          */
         void destroyChild(const std::string &name);
-        
+
         /**
          * @brief Get child with specific name
          * @param name name of child node
@@ -97,7 +97,7 @@ class Node {
          * @return true, if child is attached
          */
         bool hasChild(const std::string &name) const;
-        
+
         /**
          * @brief Check if this node is root
          */
@@ -107,7 +107,7 @@ class Node {
          * @brief Get root of tree
          */
         Node* getRoot() const;
-        
+
         /**
          * @brief Get name of node
          */
@@ -141,7 +141,7 @@ class Node {
     private:
         std::string name;
         Node *parent = nullptr;
-        std::list<Node*> children; 
+        std::list<Node*> children;
 };
 
 NOXIS_NS_END;

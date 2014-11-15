@@ -27,11 +27,11 @@ Node* Node::attachChild(Node *child) {
     assert(child != nullptr);
     assert(child->parent != this);
     assert(child != this);
-    
+
     if(child->parent != nullptr) {
         child->parent->children.remove(child);
     }
-    
+
     child->parent = this;
     children.push_back(child);
 
@@ -49,29 +49,29 @@ void Node::detachChild(Node *child) {
 
 void Node::detachFromParent() {
     assert(parent != nullptr);
-    
+
     parent->children.remove(this);
     parent = nullptr;
 }
 
 Node* Node::detachChild(const std::string &name) {
     auto node = getChild(name);
-    
+
     if(node != nullptr) {
         children.remove(node);
         node->parent = nullptr;
     }
-    
+
     return node;
 }
 
 Node* Node::getChild(const std::string &name) {
-    auto result = std::find_if(children.begin(), children.end(), 
+    auto result = std::find_if(children.begin(), children.end(),
             [&name] (Node *node) {
                 return node->name == name;
-    }); 
-    
-    return result != children.end() ? *result : nullptr; 
+    });
+
+    return result != children.end() ? *result : nullptr;
 }
 
 bool Node::isRoot() const {
@@ -103,7 +103,7 @@ void Node::destroyAllChildren() {
 }
 
 void Node::destroyChild(Node *child) {
-    assert(child != nullptr); 
+    assert(child != nullptr);
     assert(child != this);
     assert(child->parent == this);
 
@@ -130,7 +130,7 @@ void Node::setName(const std::string &name) {
 
 Node* Node::getParent() const {
     return parent;
-} 
+}
 
 void Node::setParent(Node *parent) {
     assert(parent != this);

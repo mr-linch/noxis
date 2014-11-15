@@ -17,8 +17,8 @@ class Resource {
         /**
          * @brief Get resoruce location path
          */
-        std::string getPath() const;          
-        
+        std::string getPath() const;
+
         /**
          * @brief Free resrouce
          */

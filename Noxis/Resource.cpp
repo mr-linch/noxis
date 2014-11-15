@@ -11,7 +11,7 @@ std::string Resource::getPath() const {
 }
 
 Resource::~Resource() {
-    
+
 }
 
 NOXIS_NS_END;

@@ -21,7 +21,7 @@ class Scene : public Node {
          * @brief Called when scene start execution
          */
         virtual void onStart();
-        
+
         /**
          * @brief Called when scene paused
          */
@@ -31,7 +31,7 @@ class Scene : public Node {
          * @brief Called when scene resume execution
          */
         virtual void onResume();
-        
+
         /**
          * @brief Called whece scene finish execution
          */

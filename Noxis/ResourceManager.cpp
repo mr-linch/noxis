@@ -8,7 +8,7 @@ NOXIS_NS_BEGIN;
 
 ResourceManager::ResourceManager(const std::string &rootPath_) :
     rootPath(rootPath_) {
-     
+
 }
 
 void ResourceManager::setRootPath(const std::string &rootPath) {
@@ -29,7 +29,7 @@ Resource* ResourceManager::load(const std::string path, std::string id) {
     if(cached != resources.end()) {
         return cached->second;
     }
-    
+
     std::clog << "Load resource \"" << path << "\"" << std::endl;
     resources[id] = new Resource(path);
 
@@ -43,7 +43,7 @@ Resource* ResourceManager::unload(const std::string &id) {
         return resource->second;
     }
     return nullptr;
-} 
+}
 
 bool ResourceManager::remove(const std::string &id) {
     auto resource = resources.find(id);

@@ -24,12 +24,12 @@ void FPSLimiter::limit() {
 
     targetTicks = lastSecondTicks + int(frameCount * maxFrameTicks);
     currentTicks = SDL_GetTicks();
-    averageTicks += currentTicks - lastFrameTicks; 
+    averageTicks += currentTicks - lastFrameTicks;
 
     if(currentTicks - lastFrameTicks <= minTicks) {
         minTicks = currentTicks - lastFrameTicks;
-    } 
-    
+    }
+
     if(currentTicks - lastFrameTicks >= maxFrameTicks) {
         maxTicks = currentTicks - lastFrameTicks;
     }
@@ -53,7 +53,7 @@ void FPSLimiter::limit() {
         maxTicks = 0;
         averageTicks = 0;
         lastSecondTicks = SDL_GetTicks();
-    }   
+    }
 }
 
 int FPSLimiter::getFrameMinTime() const {
