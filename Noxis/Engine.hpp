@@ -1,9 +1,11 @@
 #pragma once
 
+#include "ns.hpp"
+#include "FPSLimiter.hpp"
+
 #include <stack>
 #include <string>
 
-#include "ns.hpp"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -28,7 +30,8 @@ class Engine {
 
         std::stack<Scene*> scenes;
 
-        unsigned int maxFPS = 25;
+        FPSLimiter fpsLimiter;
+
     public:
         /**
          * @brief Get shared instance of engine
@@ -71,16 +74,12 @@ class Engine {
         void pop();
         
         void popAll();
-
+    
         /**
-         * @brief Set max value of frame rate
+         * @brief Get frame rate limiter
          */
-        void setMaxFPS(unsigned int maxFPS);
+        const FPSLimiter& getFPSLimiter() const;
 
-        /**
-         * @brief Get max value of frame rate
-         */
-        unsigned int getMaxFPS() const;
 };
 
 NOXIS_NS_END;
