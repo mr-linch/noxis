@@ -138,6 +138,15 @@ class Node {
          */
         void update();
 
+        /**
+         * @brief Find first node with specific name
+         */
+        Node* find(const std::string &name) const;
+        /**
+         * @brief Find all nodes with specific name
+         */
+        std::list<Node*> finds(const std::string &name) const;
+
     private:
         std::string name;
         Node *parent = nullptr;

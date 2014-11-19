@@ -1,6 +1,7 @@
 #include <Noxis/Noxis.hpp>
 #include <iostream>
 
+
 using namespace std;
 using namespace Noxis;
 
@@ -15,7 +16,10 @@ int main() {
                 (new Node("foreground"))
                     ->attachChild(new Node("player"))
                     ->attachChild(new Node("enemy"))
+                    ->attachChild(new Node("sun"))
                     ->attachChild(new Node("bullet")));
+
+    cout << scene->find("sun") << endl;
 
     delete scene;
 }

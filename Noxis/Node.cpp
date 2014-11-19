@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cassert>
 #include <algorithm>
+#include <stack>
+#include <unordered_set>
 
 NOXIS_NS_BEGIN;
 
@@ -155,5 +157,52 @@ void Node::update() {
         child->update();
     }
 }
+
+Node* Node::find(const std::string &name) const {
+
+    std::stack<Node*> nodes;
+    std::unordered_set<Node*> visited;
+
+    nodes.push(const_cast<Node*>(this));
+    while(!nodes.empty()) {
+        auto node = nodes.top(); nodes.pop();
+        if(node->name == name) {
+            return node;
+        }
+        if(visited.find(node) == visited.end()) {
+            visited.insert(node);
+            for(auto &child : node->children) {
+                nodes.push(child);
+            }
+        }
+    }
+
+    return nullptr;
+}
+
+
+std::list<Node*> Node::finds(const std::string &name) const {
+
+    std::stack<Node*> nodes;
+    std::unordered_set<Node*> visited;
+    std::list<Node*> result;
+
+    nodes.push(const_cast<Node*>(this));
+    while(!nodes.empty()) {
+        auto node = nodes.top(); nodes.pop();
+        if(node->name == name) {
+            result.push_back(node);
+        }
+        if(visited.find(node) == visited.end()) {
+            visited.insert(node);
+            for(auto &child : node->children) {
+                nodes.push(child);
+            }
+        }
+    }
+
+    return result;
+}
+
 
 NOXIS_NS_END;
