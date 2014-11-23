@@ -7,13 +7,13 @@
 NOXIS_NS_BEGIN;
 
 template<typename T>
-class Point2D {
+class Vector2D {
     public:
         T x, y;
-        Point2D() : x(T(0)), y(T(0)) {}
-        Point2D(const T &value) : x(value), y(value) {}
-        Point2D(const T &xValue, const T &yValue) : x(xValue), y(yValue) {}
-        Point2D(const Point2D &v) : x(v.x), y(v.y) {}
+        Vector2D() : x(T(0)), y(T(0)) {}
+        Vector2D(const T &value) : x(value), y(value) {}
+        Vector2D(const T &xValue, const T &yValue) : x(xValue), y(yValue) {}
+        Vector2D(const Vector2D &v) : x(v.x), y(v.y) {}
 
         /**
          * @brief Squared lenght of vector
@@ -34,21 +34,21 @@ class Point2D {
         /**
          * @brief The dot product of two vector
          */
-        T dot(const Point2D &v) const {
+        T dot(const Vector2D &v) const {
             return x * v.x + y * v.y;
         }
 
         /**
          * @brief Squared distance between this vector and another
          */
-        T distanceSquared(const Point2D& v) const {
+        T distanceSquared(const Vector2D& v) const {
             return (x - v.x) * (x - v.x) + (y - v.y) * (y - v.y);
         }
 
         /**
          * @brief Distance between this vector and another
          */
-        T distance(const Point2D& v) const {
+        T distance(const Vector2D& v) const {
             return distanceSquared(v);
         }
 
@@ -70,7 +70,7 @@ class Point2D {
          * @brief Rotate vector by the given angle
          * @param degrees the angle in degrees
          */
-        Point2D& rotate(T degrees) const {
+        Vector2D& rotate(T degrees) const {
             return rotateInRadians(toRadians(degrees));
         }
 
@@ -78,7 +78,7 @@ class Point2D {
          * @brief Rotate vector by the given angle
          * @param degrees the angle in radians
          */
-        Point2D& rotateInRadians(T radians) const {
+        Vector2D& rotateInRadians(T radians) const {
              float cos = std::cos(radians);
              float sin = std::sin(radians);
 
@@ -91,102 +91,102 @@ class Point2D {
              return *this;
         }
 
-        Point2D operator + () const {
+        Vector2D operator + () const {
             return *this;
         }
 
-        Point2D operator - () const {
+        Vector2D operator - () const {
             return {-x, -y};
         }
 
-        Point2D operator + (const Point2D &v) const {
+        Vector2D operator + (const Vector2D &v) const {
             return {x + v.x, y + v.y};
         }
 
-        Point2D operator - (const Point2D &v) const {
+        Vector2D operator - (const Vector2D &v) const {
             return {x - v.x, y - v.y};
         }
 
-        Point2D operator * (const Point2D &v) const {
+        Vector2D operator * (const Vector2D &v) const {
             return {x * v.x, y * v.y};
         }
 
-        Point2D operator / (const Point2D &v) const {
+        Vector2D operator / (const Vector2D &v) const {
             return {x / v.x, y / v.y};
         }
 
-        Point2D operator + (const T &s) const {
+        Vector2D operator + (const T &s) const {
             return {x + s, y + s};
         }
 
-        Point2D operator - (const T &s) const {
+        Vector2D operator - (const T &s) const {
             return {x - s, y - s};
         }
 
-        Point2D operator * (const T &s) const {
+        Vector2D operator * (const T &s) const {
             return {x * s, y * s};
         }
 
-        Point2D operator / (const T &s) const {
+        Vector2D operator / (const T &s) const {
             return {x / s, y / s};
         }
 
-        Point2D& operator += (const Point2D &v) {
+        Vector2D& operator += (const Vector2D &v) {
             x += v.x;
             y += v.y;
             return this;
         }
 
-        Point2D& operator -= (const Point2D &v) {
+        Vector2D& operator -= (const Vector2D &v) {
             x -= v.x;
             y -= v.y;
             return this;
         }
 
-        Point2D& operator /= (const Point2D &v) {
+        Vector2D& operator /= (const Vector2D &v) {
             x /= v.x;
             y /= v.y;
             return this;
         }
 
-        Point2D& operator *= (const Point2D &v) {
+        Vector2D& operator *= (const Vector2D &v) {
             x *= v.x;
             y *= v.y;
             return this;
         }
 
-        Point2D& operator += (const T &s) {
+        Vector2D& operator += (const T &s) {
             x += s;
             y += s;
             return this;
         }
 
-        Point2D& operator -= (const T &s) {
+        Vector2D& operator -= (const T &s) {
             x -= s;
             y -= s;
             return this;
         }
 
-        Point2D& operator *= (const T &s) {
+        Vector2D& operator *= (const T &s) {
             x *= s;
             y *= s;
             return this;
         }
 
-        Point2D& operator /= (const T &s) {
+        Vector2D& operator /= (const T &s) {
             x /= s;
             y /= s;
         }
 
-        Point2D& operator == (const Point2D &v) const {
+        Vector2D& operator == (const Vector2D &v) const {
             return (x == v.x) && (y == v.y);
         }
 
-        Point2D& operator != (const Point2D &v) const {
+        Vector2D& operator != (const Vector2D &v) const {
             return (x != v.x) || (y != v.y);
         }
 
-        Point2D& operator = (const Point2D &v) {
+        Vector2D& operator = (const Vector2D &v) {
             x = v.x;
             y = v.y;
             return *this;
@@ -194,7 +194,8 @@ class Point2D {
 
 };
 
-typedef Point2D<float> Point;
+typedef Vector2D<float> Vector2f;
+typedef Vector2D<int> Vector2i;
 
 NOXIS_NS_END;
 

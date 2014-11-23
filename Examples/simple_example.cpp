@@ -1,7 +1,5 @@
 #include <Noxis/Noxis.hpp>
 
-#include <SDL2/SDL.h>
-
 #include <iostream>
 
 USING_NOXIS_NS;
@@ -11,7 +9,7 @@ class SimpleScene : public Scene {
         Engine *engine = Engine::getInstance();
     public:
         virtual void onStart() {
-            auto manager = Engine::getInstance()->getResourceManager();
+            auto manager = engine->getResourceManager(); 
             logo = manager->load<Texture>("logo.png");
         }
 
@@ -23,6 +21,5 @@ class SimpleScene : public Scene {
 
 int main() {
     auto engine = Engine::getInstance();
-
     return engine->run(new SimpleScene());
 }

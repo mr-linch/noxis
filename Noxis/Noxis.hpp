@@ -6,7 +6,7 @@
 #include "Node.hpp"
 #include "utils.hpp"
 #include "filesystem.hpp"
-#include "Point2D.hpp"
+#include "Vector2D.hpp"
 #include "Size2D.hpp"
 #include "ResourceManager.hpp"
 #include "Resource.hpp"
