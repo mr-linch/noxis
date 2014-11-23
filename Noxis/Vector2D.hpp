@@ -1,6 +1,7 @@
 #pragma once
 
 #include "utils.hpp"
+#include "Size.hpp"
 
 #include <cmath>
 
@@ -14,6 +15,10 @@ class Vector2D {
         Vector2D(const T &value) : x(value), y(value) {}
         Vector2D(const T &xValue, const T &yValue) : x(xValue), y(yValue) {}
         Vector2D(const Vector2D &v) : x(v.x), y(v.y) {}
+        
+        template<typename _T>
+        Vector2D(const Size2D<_T> &size) : x(size.width), y(size.height) {}
+
 
         /**
          * @brief Squared lenght of vector

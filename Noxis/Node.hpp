@@ -18,7 +18,9 @@ class Node {
          * @param name name of this node
          * @param parent pointer to parent of this node in scene tree, if this is root set to nullptr
          */
-        Node(const std::string &name = "node", Node *parent = nullptr);
+        Node(const std::string &name = "noname", Node *parent = nullptr);
+
+        Node(Node *parent = nullptr);
 
         virtual ~Node();
 
@@ -228,20 +230,50 @@ class Node {
          */
         int getWorldY() const;
 
+        /**
+         * @brief Get position of node
+         */
+        const Vector2i& getPosition() const;
+
+        /**
+         * @brief Set position of node
+         */
+        void setPosition(int x, int y);
+
+        void setPosition(const Vector2i &center);
+
+        /**
+         * @brief Get size of node
+         */
+        const Size& getSize() const;
+
+        /**
+         * @brief Get width of node
+         */
+        int getWidth() const;
+
+        /**
+         * @brief Get height of node
+         */
+        int getHeight() const;
+
     protected:
         const Transform& getParentWorldTransform() const;
+        
+        void setSize(const Size &size);
 
 
     private:
 
         Transform localTransform;
         Transform worldTransform;
+        Size size;
 
         std::string name;
         Node *parent = nullptr;
         std::list<Node*> children;
 
-        bool visible;
+        bool visible = true;
         bool sleep;
         
 };

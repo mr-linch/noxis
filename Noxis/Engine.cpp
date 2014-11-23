@@ -1,6 +1,7 @@
 #include "Engine.hpp"
 
 #include "Scene.hpp"
+#include "Renderer.hpp"
 #include "ResourceManager.hpp"
 
 #include <iostream>
@@ -15,8 +16,9 @@ Engine::Engine() : resourceManager(new ResourceManager) {
 
 Engine::~Engine() {
     delete resourceManager;
+    delete renderer;
+
     IMG_Quit();
-    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
@@ -49,12 +51,7 @@ bool Engine::initialize(const std::string &title, int width, int height) {
         return false;
     }
     
-    // Create Renderer
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    if(renderer == nullptr) {
-        std::cerr << "SDL_CreateRenderer error: " << SDL_GetError() << std::endl;
-        return false;
-    }
+    renderer = new Renderer(window);
 
     // Initialize SDL2_image lib
     auto imageLibInitFlags = IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF;
@@ -96,19 +93,19 @@ bool Engine::run(Scene* startScene) {
         
         unsigned deltatime = fpsLimiter.limit();
 
-        SDL_RenderClear(renderer);
-
         if(scenes.empty()) {
             running = false;
         } else {
+
             scenes.top()->updateTransform(false);
-            std::cout << std::endl;
             scenes.top()->update(deltatime);
-            scenes.top()->render(nullptr);
+
+            renderer->clear();
+
+            scenes.top()->render(renderer);
+
+            renderer->show();
         }
-
-
-        SDL_RenderPresent(renderer);
     }
 
     // Pop all scenes from stack
@@ -172,7 +169,7 @@ ResourceManager* Engine::getResourceManager() const {
     return resourceManager;
 }
 
-SDL_Renderer* Engine::getRenderer() const {
+Renderer* Engine::getRenderer() const {
     return renderer;
 }
 

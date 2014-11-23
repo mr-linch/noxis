@@ -10,6 +10,10 @@
 
 NOXIS_NS_BEGIN;
 
+Node::Node(Node *parent) : Node("noname", parent) {
+
+}
+
 Node::Node(const std::string &name, Node *parent) : name(name), parent(parent){
     if(this->parent != nullptr) {
         parent->children.push_back(this);
@@ -248,7 +252,6 @@ void Node::updateTransform(bool dirty) {
 
     if(dirty) {
         worldTransform = localTransform.combine(parentWorldTransform);
-        //std::cout << "Update transform of " << name << " to " << worldTransform.getPosition().x << "; " << worldTransform.getPosition().y << std::endl;
         localTransform.resetDirty();
     }
 
@@ -292,6 +295,36 @@ int Node::getWorldX() const {
 int Node::getWorldY() const {
     return worldTransform.getY();
 }
+
+const Vector2i& Node::getPosition() const {
+    return localTransform.getPosition();
+}
+
+void Node::setPosition(int x, int y) {
+    localTransform.setPosition(x, y);
+}
+
+void Node::setPosition(const Vector2i &position) {
+    localTransform.setPosition(position);
+}
+
+void Node::setSize(const Size &size) {
+    this->size = size;
+}
+
+const Size& Node::getSize() const {
+    return size;
+}
+
+int Node::getWidth() const {
+    return size.width;
+}
+
+int Node::getHeight() const {
+    return size.height;
+}
+
+
 
 
 NOXIS_NS_END;

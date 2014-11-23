@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(NoxisEngine)
 
-list(APPEND CMAKE_CXX_FLAGS "-Wall -std=c++11")
+list(APPEND CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
 
 include(FindPkgConfig)
 pkg_search_module(SDL2 REQUIRED sdl2)

@@ -20,7 +20,7 @@ std::string ResourceManager::getRootPath() const {
 bool ResourceManager::remove(const std::string &id) {
     auto resource = resources.find(id);
     if(resource != resources.end()) {
-        std::clog << "Remove resource " << id << " (\"" << resource->second->getPath() << "\")" << std::endl;
+        std::clog << "Unload resource " << id << " (\"" << resource->second->getPath() << "\")" << std::endl;
         delete resource->second;
         resource->second = nullptr;
         resources.erase(resource);
@@ -31,7 +31,7 @@ bool ResourceManager::remove(const std::string &id) {
 
 void ResourceManager::clear() {
     for(auto &resource : resources) {
-        std::clog << "Remove resource " << resource.first << " (\"" << resource.second->getPath() << "\")" << std::endl;
+        std::clog << "Unload resource " << resource.first << " (\"" << resource.second->getPath() << "\")" << std::endl;
         delete resource.second;
         resource.second = nullptr;
     }

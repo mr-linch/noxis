@@ -14,6 +14,7 @@ NOXIS_NS_BEGIN;
 
 class Scene;
 class ResourceManager;
+class Renderer;
 
 class Engine {
     private:
@@ -24,7 +25,7 @@ class Engine {
         Engine& operator = (const Engine &engine) = delete;
 
         SDL_Window* window = nullptr;
-        SDL_Renderer* renderer = nullptr;
+        Renderer *renderer = nullptr;
 
         bool running = false;
         bool initialized = false;
@@ -91,7 +92,7 @@ class Engine {
          */
         ResourceManager* getResourceManager() const;
 
-        SDL_Renderer* getRenderer() const;
+        Renderer* getRenderer() const;
 };
 
 NOXIS_NS_END;
