@@ -31,7 +31,14 @@ bool Engine::initialize(const std::string &title, int width, int height) {
         std::cerr << "SDL_Init error: " << SDL_GetError() << std::endl;
         return false;
     }
+    
+    // Get and print SDL runtime verion
+    SDL_version version;
+    SDL_GetVersion(&version);
 
+    std::clog << "SDL version " << (int)version.major << "." << (int)version.minor << "." << (int)version.patch << std::endl;
+    
+    // Create Window
     window = SDL_CreateWindow(title.c_str(),
             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
             width, height,
@@ -41,7 +48,8 @@ bool Engine::initialize(const std::string &title, int width, int height) {
         std::cerr << "SDL_CreateWindow error: " << SDL_GetError() << std::endl;
         return false;
     }
-
+    
+    // Create Renderer
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if(renderer == nullptr) {
         std::cerr << "SDL_CreateRenderer error: " << SDL_GetError() << std::endl;
@@ -54,6 +62,11 @@ bool Engine::initialize(const std::string &title, int width, int height) {
         std::cerr << "IMG_Init error: " << IMG_GetError() << std::endl;
         return false;
     }
+    
+    // Get and print SDL image version
+    auto imageLibVersion = IMG_Linked_Version();
+    std::clog << "SDL Image version " << (int)imageLibVersion->major << "." 
+        << (int)imageLibVersion->minor << "." << (int)imageLibVersion->patch << std::endl;
 
     initialized = true;
     return true;
