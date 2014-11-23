@@ -7,6 +7,8 @@
 
 NOXIS_NS_BEGIN;
 
+class Renderer;
+
 class Node {
     public:
 
@@ -15,7 +17,7 @@ class Node {
          * @param name name of this node
          * @param parent pointer to parent of this node in scene tree, if this is root set to nullptr
          */
-        Node(const std::string &name = "noname", Node *parent = nullptr);
+        Node(const std::string &name = "node", Node *parent = nullptr);
 
         virtual ~Node();
 
@@ -129,28 +131,62 @@ class Node {
         void setParent(Node *node);
 
         /**
-         * @brief Called every frame
+         * @brief Called every frame for update object state
          */
-        virtual void onUpdate();
+        virtual void onUpdate(unsigned deltatime);
 
         /**
          * @brief Update this node and all children recursive
          */
-        void update();
+        void update(unsigned deltatime);
+    
+        /**
+         * @brief Called every frame for draw object state
+         */
+        virtual void onRender(Renderer* render);
+
+        /**
+         * @brief Render this node and all children recursice
+         */
+        void render(Renderer *render);
 
         /**
          * @brief Find first node with specific name
          */
         Node* find(const std::string &name) const;
+
         /**
          * @brief Find all nodes with specific name
          */
         std::list<Node*> finds(const std::string &name) const;
+    
+        /**
+         * @brief Check if node is visible
+         */
+        bool isVisible() const;
+        
+        /**
+         * @brief Set visible
+         */
+        void setVisible(bool value);
+
+        /**
+         * @brief Check if node is sleep
+         */
+        bool isSleeping() const;
+        
+        /**
+         * @brief Set sleep
+         */
+        void setSleep(bool value);
 
     private:
         std::string name;
         Node *parent = nullptr;
         std::list<Node*> children;
+
+        bool visible;
+        bool sleep;
 };
 
 NOXIS_NS_END;

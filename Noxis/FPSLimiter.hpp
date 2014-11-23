@@ -47,7 +47,7 @@ class FPSLimiter {
         /**
          * @brief Limit frame rate
          */
-        void limit();
+        unsigned limit();
 };
 
 NOXIS_NS_END;

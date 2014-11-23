@@ -10,7 +10,7 @@ class Scene : public Node {
         /**
          * @brief Default contstructor
          */
-        Scene();
+        Scene(const std::string &name = "scene");
 
         /**
          * @brief Destructor

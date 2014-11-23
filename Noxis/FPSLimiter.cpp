@@ -2,6 +2,8 @@
 
 #include <SDL2/SDL.h>
 
+#include <iostream>
+
 NOXIS_NS_BEGIN;
 
 FPSLimiter::FPSLimiter(int maxFPS) {
@@ -19,7 +21,7 @@ void FPSLimiter::setMaxFPS(int maxFPS) {
     lastSecondTicks = SDL_GetTicks();
 }
 
-void FPSLimiter::limit() {
+unsigned FPSLimiter::limit() {
     frameCount++;
 
     targetTicks = lastSecondTicks + int(frameCount * maxFrameTicks);
@@ -39,8 +41,10 @@ void FPSLimiter::limit() {
         currentTicks = SDL_GetTicks();
     }
 
-    lastFrameTicks = currentTicks;
+    unsigned delta = currentTicks - lastFrameTicks;
 
+    lastFrameTicks = currentTicks;
+    
 
     if(currentTicks - lastSecondTicks >= 1000) {
         fps = frameCount;
@@ -54,6 +58,8 @@ void FPSLimiter::limit() {
         averageTicks = 0;
         lastSecondTicks = SDL_GetTicks();
     }
+
+    return delta;
 }
 
 int FPSLimiter::getFrameMinTime() const {

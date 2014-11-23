@@ -2,7 +2,7 @@
 
 NOXIS_NS_BEGIN;
 
-Scene::Scene() {
+Scene::Scene(const std::string &name) : Node(name, nullptr) {
 
 }
 

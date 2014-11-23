@@ -1,4 +1,6 @@
-#include "Noxis.hpp"
+#include "Node.hpp"
+
+#include "utils.hpp"
 
 #include <iostream>
 #include <cassert>
@@ -147,14 +149,29 @@ void Node::setParent(Node *parent) {
     }
 }
 
-void Node::onUpdate() {
-
+void Node::onUpdate(unsigned deltatime) {
+    NOXIS_USE(deltatime);
 }
 
-void Node::update() {
-    onUpdate();
-    for(auto child : children) {
-        child->update();
+void Node::update(unsigned deltatime) {
+    if(!sleep) {
+        onUpdate(deltatime);
+        for(auto child : children) {
+            child->update(deltatime);
+        }
+    }
+}
+
+void Node::onRender(Renderer *renderer) {
+    NOXIS_USE(renderer);
+}
+
+void Node::render(Renderer *renderer) {
+    if(visible) {
+        onRender(renderer);
+        for(auto child : children) {
+            child->render(renderer);
+        }
     }
 }
 
@@ -202,6 +219,22 @@ std::list<Node*> Node::finds(const std::string &name) const {
     }
 
     return result;
+}
+
+bool Node::isVisible() const {
+    return visible;
+}
+
+bool Node::isSleeping() const {
+    return sleep;
+}
+
+void Node::setVisible(bool value) {
+    visible = value;
+}
+
+void Node::setSleep(bool value) {
+    sleep = value;
 }
 
 

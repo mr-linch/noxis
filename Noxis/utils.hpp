@@ -4,6 +4,8 @@
 
 #include "ns.hpp"
 
+#define NOXIS_USE(VAR) ((VAR)=(VAR))
+
 NOXIS_NS_BEGIN;
 
 class Node;

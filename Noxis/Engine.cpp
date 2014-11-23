@@ -1,6 +1,6 @@
 #include "Engine.hpp"
+
 #include "Scene.hpp"
-#include "FPSLimiter.hpp"
 #include "ResourceManager.hpp"
 
 #include <iostream>
@@ -75,7 +75,7 @@ bool Engine::initialize(const std::string &title, int width, int height) {
 bool Engine::run(Scene* startScene) {
     if(!initialized) {
         if(!initialize()) {
-            return EXIT_FAILURE;
+            return false;
         }
     }
 
@@ -93,16 +93,18 @@ bool Engine::run(Scene* startScene) {
                 // TODO: Add event processing
             }
         }
+        
+        unsigned deltatime = fpsLimiter.limit();
 
         SDL_RenderClear(renderer);
 
         if(scenes.empty()) {
             running = false;
         } else {
-            scenes.top()->onUpdate();
+            scenes.top()->update(deltatime);
+            scenes.top()->render(nullptr);
         }
 
-        fpsLimiter.limit();
 
         SDL_RenderPresent(renderer);
     }
