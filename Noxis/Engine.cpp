@@ -101,6 +101,8 @@ bool Engine::run(Scene* startScene) {
         if(scenes.empty()) {
             running = false;
         } else {
+            scenes.top()->updateTransform(false);
+            std::cout << std::endl;
             scenes.top()->update(deltatime);
             scenes.top()->render(nullptr);
         }

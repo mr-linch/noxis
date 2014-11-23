@@ -22,3 +22,6 @@
 
 # Other
 build/
+
+# vim 
+.ycm_extra_conf*

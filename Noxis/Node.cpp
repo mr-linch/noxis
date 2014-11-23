@@ -237,5 +237,61 @@ void Node::setSleep(bool value) {
     sleep = value;
 }
 
+const Transform& Node::getParentWorldTransform() const {
+    return parent != nullptr ? parent->worldTransform : Transform::origin(); 
+}
+
+void Node::updateTransform(bool dirty) {
+    auto parentWorldTransform = getParentWorldTransform();  
+    
+    dirty |= localTransform.isDirty();
+
+    if(dirty) {
+        worldTransform = localTransform.combine(parentWorldTransform);
+        //std::cout << "Update transform of " << name << " to " << worldTransform.getPosition().x << "; " << worldTransform.getPosition().y << std::endl;
+        localTransform.resetDirty();
+    }
+
+    for(auto &child : children) {
+        child->updateTransform(dirty);
+    }
+}
+
+const Transform& Node::getLocalTransform() const {
+    return localTransform;
+}
+
+Transform& Node::getLocalTransform() {
+    return localTransform;
+}
+
+const Transform& Node::getWorldTransform() const {
+    return worldTransform;
+}
+
+void Node::setX(int x) {
+    localTransform.setX(x);
+}
+
+void Node::setY(int y) {
+    localTransform.setX(y);
+}
+
+int Node::getX() const {
+    return localTransform.getX();
+}
+
+int Node::getY() const {
+    return localTransform.getY();
+}
+
+int Node::getWorldX() const {
+    return worldTransform.getX();
+}
+
+int Node::getWorldY() const {
+    return worldTransform.getY();
+}
+
 
 NOXIS_NS_END;

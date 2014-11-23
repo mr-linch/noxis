@@ -1,9 +1,10 @@
 #pragma once
 
+#include "ns.hpp"
+#include "Transform.hpp"
+
 #include <list>
 #include <string>
-
-#include "ns.hpp"
 
 NOXIS_NS_BEGIN;
 
@@ -174,19 +175,75 @@ class Node {
          * @brief Check if node is sleep
          */
         bool isSleeping() const;
+
+        /**
+         * @brief Update transform
+         */
+        void updateTransform(bool dirty);
         
         /**
          * @brief Set sleep
          */
         void setSleep(bool value);
+        
+        /**
+         * @brief Get local transform of node
+         */
+        const Transform& getLocalTransform() const;
+
+        Transform& getLocalTransform();
+
+        /**
+         * @brief Get world transform of node
+         */
+        const Transform& getWorldTransform() const;
+        
+        /**
+         * @brief Set local X position
+         */
+        void setX(int x);
+
+        /**
+         * @brief Set local Y position
+         */
+        void setY(int y);
+    
+        /**
+         * @brief Get local X position
+         */
+        int getX() const;
+        
+        /**
+         * @brief Get local Y position
+         */
+        int getY() const;
+        
+        /**
+         * @brief Get world X position
+         */
+        int getWorldX() const;
+
+        /**
+         * @brief Get world Y position
+         */
+        int getWorldY() const;
+
+    protected:
+        const Transform& getParentWorldTransform() const;
+
 
     private:
+
+        Transform localTransform;
+        Transform worldTransform;
+
         std::string name;
         Node *parent = nullptr;
         std::list<Node*> children;
 
         bool visible;
         bool sleep;
+        
 };
 
 NOXIS_NS_END;
